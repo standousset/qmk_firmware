@@ -116,7 +116,8 @@ td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line
     <div class="tag">Étape 1</div>
     <h2>Flasher les deux moitiés</h2>
     <ol>
-      <li>Mets la moitié <b>droite</b> en mode flash, comme avant : maintiens ensemble <b>T3 et T4</b> (les deux touches du bas sous ta main droite), puis appuie sur <b>Boot</b>, la touche tout en haut à droite. Pour la moitié gauche : <b>T1 et T2</b>, puis Boot tout en haut à gauche. Chaque moitié marche seule, même si l'autre n'est pas branchée. Un disque <code>RPI-RP2</code> apparaît. Cela marche avec ton ancien firmware comme avec le nouveau. Secours si le clavier ne répond plus : le petit bouton au <b>dos du circuit</b> (parfois deux pastilles à relier avec une pince à épiler) pendant que tu rebranches l'USB.</li>
+      <li>Mets la moitié <b>droite</b> en mode flash avec la touche <b>Boot</b>. Branche seulement cette moitié en USB, sans le câble TRRS. Maintiens ensemble <b>T3 et T4</b> (les deux touches du bas sous ta main droite), puis appuie sur <b>Boot</b>, la touche tout en haut à droite. Pour la moitié gauche : <b>T1 et T2</b>, puis Boot tout en haut à gauche. Un disque <code>RPI-RP2</code> apparaît. Pour en sortir sans flasher, débranche l'USB puis rebranche-le : rien n'est effacé.<br>
+        <b>Secours</b>, si la touche Boot ne répond pas (par exemple avec un ancien firmware) : sur la carte verte, maintiens le bouton <b>BOOT</b> (sur la face du dessus), branche l'USB, puis relâche après 1 seconde. Le disque <code>RPI-RP2</code> apparaît.</li>
       <li>Glisse <code>sweeq_hk_right.uf2</code> sur ce disque. La carte redémarre seule.</li>
       <li>Fais la même chose avec la moitié <b>gauche</b> et <code>sweeq_hk_left.uf2</code>. Les deux fichiers sont à la racine du dépôt <code>qmk_firmware</code>.</li>
       <li>Efface l'EEPROM : ouvre la couche Config (T2 et T3 ensemble, ou la paire de la moitié branchée), puis appuie sur la touche <b>Clear EEPROM</b>. Débranche et rebranche le clavier.</li>
@@ -180,7 +181,7 @@ td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line
     <table>
       <tr><th>Touche</th><th>Effet</th></tr>
       <tr><td><b>Mode PLAIN</b> / <b>Mode ERGOL</b></td><td>Choisit le mode. Le clavier s'en souvient après débranchement.</td></tr>
-      <tr><td><b>Boot</b></td><td>Passe en mode flash la moitié branchée en USB. C'est la méthode normale. Le bouton au dos du circuit sert de secours.</td></tr>
+      <tr><td><b>Boot</b></td><td>Passe en mode flash la moitié branchée en USB. C'est la méthode normale. Le bouton BOOT de la carte verte sert de secours.</td></tr>
       <tr><td><b>Clear EEPROM</b></td><td>Efface la mémoire. Rebranche le clavier ensuite.</td></tr>
       <tr><td><b>Clic G / M / D</b></td><td>Boutons de souris pour le pavé tactile.</td></tr>
     </table>
