@@ -19,6 +19,7 @@
   --shift: #c6d6ec;
   --layer: #dccdea;
   --none: #e3e7eb;
+  --sys: #f4c49a;
   --font-display: "Space Grotesk", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
@@ -27,14 +28,14 @@
   :root:not([data-theme="light"]) {
     --bg: #12181f; --panel: #1a222b; --ink: #e6ebf0; --muted: #9aa7b4; --line: #2d3945;
     --key: #26313c; --key-edge: #3a4856; --accent: #4cc2bc; --accent-soft: #17363a;
-    --ctrl: #5a3a35; --alt: #5a4c24; --gui: #34502d; --shift: #2f4666; --layer: #473a5c; --none: #1e2730;
+    --ctrl: #5a3a35; --alt: #5a4c24; --gui: #34502d; --shift: #2f4666; --layer: #473a5c; --none: #1e2730; --sys: #7a4a1f;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #12181f; --panel: #1a222b; --ink: #e6ebf0; --muted: #9aa7b4; --line: #2d3945;
   --key: #26313c; --key-edge: #3a4856; --accent: #4cc2bc; --accent-soft: #17363a;
-  --ctrl: #5a3a35; --alt: #5a4c24; --gui: #34502d; --shift: #2f4666; --layer: #473a5c; --none: #1e2730;
+  --ctrl: #5a3a35; --alt: #5a4c24; --gui: #34502d; --shift: #2f4666; --layer: #473a5c; --none: #1e2730; --sys: #7a4a1f;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -70,6 +71,7 @@ ol, ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; g
 .k small { font-size: 10px; color: var(--muted); margin-top: 2px; }
 .k.ctrl { background: var(--ctrl); } .k.alt { background: var(--alt); } .k.gui { background: var(--gui); }
 .k.shift { background: var(--shift); } .k.layer { background: var(--layer); } .k.none { background: var(--none); opacity: .7; }
+.k.sys { background: var(--sys); }
 .k.hit { outline: 3px solid var(--accent); outline-offset: -1px; }
 .thumbs { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
 .thumbs .k { height: 50px; }
@@ -103,6 +105,7 @@ td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line
       <span><i style="background:var(--gui)"></i>Win / Cmd</span>
       <span><i style="background:var(--shift)"></i>Maj</span>
       <span><i style="background:var(--layer)"></i>change de couche</span>
+      <span><i style="background:var(--sys)"></i>système (Boot, mode, effacement)</span>
       <span><i style="background:var(--none)"></i>rien</span>
     </div>
   </section>
@@ -111,7 +114,7 @@ td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line
     <div class="tag">Étape 1</div>
     <h2>Flasher les deux moitiés</h2>
     <ol>
-      <li>Branche la moitié <b>droite</b> en USB en maintenant le bouton BOOT de la carte (ou double appui sur RESET). Un disque <code>RPI-RP2</code> apparaît.</li>
+      <li>Mets la moitié <b>droite</b> en mode flash : débranche, puis appuie sur le petit bouton au <b>dos du circuit</b> (sur certaines cartes, ce sont deux pastilles à relier un instant avec une pince à épiler) pendant que tu rebranches l'USB. Un disque <code>RPI-RP2</code> apparaît. Si tu ne trouves pas ce bouton, une photo du dos suffit pour que je te l'indique.</li>
       <li>Glisse <code>sweeq_hk_right.uf2</code> sur ce disque. La carte redémarre seule.</li>
       <li>Fais la même chose avec la moitié <b>gauche</b> et <code>sweeq_hk_left.uf2</code>. Les deux fichiers sont à la racine du dépôt <code>qmk_firmware</code>.</li>
       <li>Efface l'EEPROM : maintiens ensemble les deux touches du milieu en bas (entourées sur le schéma « Config » plus bas), puis appuie sur la touche <b>Clear EEPROM</b>. Débranche et rebranche le clavier.</li>
@@ -175,7 +178,7 @@ td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line
     <table>
       <tr><th>Touche</th><th>Effet</th></tr>
       <tr><td><b>Mode PLAIN</b> / <b>Mode ERGOL</b></td><td>Choisit le mode. Le clavier s'en souvient après débranchement.</td></tr>
-      <tr><td><b>Boot</b></td><td>Passe en mode flash la moitié branchée en USB. Le bouton BOOT de la carte fait la même chose et ne demande pas cette couche.</td></tr>
+      <tr><td><b>Boot</b></td><td>Passe en mode flash la moitié branchée en USB. Pour un premier flash, utilise plutôt le bouton au dos du circuit.</td></tr>
       <tr><td><b>Clear EEPROM</b></td><td>Efface la mémoire. Rebranche le clavier ensuite.</td></tr>
       <tr><td><b>Clic G / M / D</b></td><td>Boutons de souris pour le pavé tactile.</td></tr>
     </table>
@@ -250,8 +253,8 @@ board('kb-dead', [
 ], [N, ['’'], ['’'], N]);
 
 board('kb-cfg', [
-  [['Boot','','layer'],['Dump','','none'],['Save','','none'],['Reset','','none'],['Scroll','','none'],['Mode PLAIN','PDF','layer'],['Mode ERGOL','PDF','layer'],N,N,['Boot','','layer']],
-  [['Clear EEPROM','','alt'],['Pav. D','','none'],['Pav. S','','none'],['Pav. buf','','none'],['Scroll','','none'],['Clic G','',''],['Clic M','',''],['Clic D','',''],['Btn 4','',''],['Clear EEPROM','','alt']],
+  [['Boot','','sys'],['Dump','','none'],['Save','','none'],['Reset','','none'],['Scroll','','none'],['Mode PLAIN','','sys'],['Mode ERGOL','','sys'],N,N,['Boot','','sys']],
+  [['Clear EEPROM','','sys'],['Pav. D','','none'],['Pav. S','','none'],['Pav. buf','','none'],['Scroll','','none'],['Clic G','',''],['Clic M','',''],['Clic D','',''],['Btn 4','',''],['Clear EEPROM','','sys']],
   [N,N,N,N,['Drag','','none'],['Drag','','none'],['Scroll','','none'],['Btn 5','',''],N,N]
 ], [N, N, N, N]);
 
