@@ -1,0 +1,257 @@
+<title>Guide Sweeq Ergo-L</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one column of sections, each with a keyboard drawn as two 5x3 halves plus thumb keys. */
+:root {
+  --bg: #eceff2;
+  --panel: #f8f9fa;
+  --ink: #18222d;
+  --muted: #5a6876;
+  --line: #cfd6dd;
+  --key: #ffffff;
+  --key-edge: #b9c3cd;
+  --accent: #0c7c78;
+  --accent-soft: #d3ece9;
+  --ctrl: #e7c9c3;
+  --alt: #f0dfb0;
+  --gui: #cfe0c2;
+  --shift: #c6d6ec;
+  --layer: #dccdea;
+  --none: #e3e7eb;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12181f; --panel: #1a222b; --ink: #e6ebf0; --muted: #9aa7b4; --line: #2d3945;
+    --key: #26313c; --key-edge: #3a4856; --accent: #4cc2bc; --accent-soft: #17363a;
+    --ctrl: #5a3a35; --alt: #5a4c24; --gui: #34502d; --shift: #2f4666; --layer: #473a5c; --none: #1e2730;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12181f; --panel: #1a222b; --ink: #e6ebf0; --muted: #9aa7b4; --line: #2d3945;
+  --key: #26313c; --key-edge: #3a4856; --accent: #4cc2bc; --accent-soft: #17363a;
+  --ctrl: #5a3a35; --alt: #5a4c24; --gui: #34502d; --shift: #2f4666; --layer: #473a5c; --none: #1e2730;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.55;
+  padding-block: 32px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+main { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1, h2 { font-family: var(--font-display); text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: 34px; line-height: 1.1; }
+h2 { font-size: 22px; }
+p { margin: 0; max-width: 68ch; }
+.lead { color: var(--muted); font-size: 16px; }
+section { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.tag { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+code, kbd { font-family: var(--font-mono); font-size: 13px; background: var(--none); padding: 1px 6px; border-radius: 4px; }
+ol, ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; max-width: 68ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 14px; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 14px; height: 14px; border-radius: 3px; border: 1px solid var(--key-edge); display: inline-block; }
+
+.board { overflow-x: auto; padding-bottom: 4px; }
+.kb { display: flex; gap: 26px; justify-content: center; min-width: 560px; }
+.half { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; width: 100%; max-width: 330px; }
+.k {
+  background: var(--key); border: 1px solid var(--key-edge); border-bottom-width: 3px; border-radius: 7px;
+  height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+  line-height: 1.15; min-width: 0; padding: 2px;
+}
+.k b { font-family: var(--font-mono); font-size: 17px; font-weight: 500; }
+.k small { font-size: 10px; color: var(--muted); margin-top: 2px; }
+.k.ctrl { background: var(--ctrl); } .k.alt { background: var(--alt); } .k.gui { background: var(--gui); }
+.k.shift { background: var(--shift); } .k.layer { background: var(--layer); } .k.none { background: var(--none); opacity: .7; }
+.k.hit { outline: 3px solid var(--accent); outline-offset: -1px; }
+.thumbs { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
+.thumbs .k { height: 50px; }
+.left .thumbs .k:nth-child(1) { grid-column: 3; }
+.left .thumbs .k:nth-child(2) { grid-column: 4 / span 2; }
+.right .thumbs .k:nth-child(1) { grid-column: 1 / span 2; }
+.right .thumbs .k:nth-child(2) { grid-column: 3; }
+.thumbs .k b { font-size: 14px; }
+.how { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; background: var(--accent-soft); border-radius: 8px; padding: 9px 12px; font-size: 14px; }
+.how strong { font-family: var(--font-display); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.scroll { overflow-x: auto; }
+@media (max-width: 520px) { h1 { font-size: 28px; } section { padding: 14px; } }
+</style>
+
+<main>
+  <header style="display:flex;flex-direction:column;gap:10px">
+    <div class="tag">Sweeq · 34 touches · deux modes</div>
+    <h1>Guide du clavier Sweeq</h1>
+    <p class="lead">Un clavier, deux comportements. Sur tes ordinateurs, il envoie des touches simples et Kanata ou Karabiner font le travail. Sur un Windows étranger en AZERTY, le clavier fait tout lui-même.</p>
+  </header>
+
+  <section>
+    <div class="tag">Lire les schémas</div>
+    <h2>Légende</h2>
+    <p>Chaque schéma montre la moitié gauche puis la moitié droite, vues de dessus. Le gros caractère est ce que tu obtiens. Le petit texte dit ce qui se passe quand tu maintiens la touche.</p>
+    <div class="legend">
+      <span><i style="background:var(--ctrl)"></i>Ctrl</span>
+      <span><i style="background:var(--alt)"></i>Alt</span>
+      <span><i style="background:var(--gui)"></i>Win / Cmd</span>
+      <span><i style="background:var(--shift)"></i>Maj</span>
+      <span><i style="background:var(--layer)"></i>change de couche</span>
+      <span><i style="background:var(--none)"></i>rien</span>
+    </div>
+  </section>
+
+  <section id="flash">
+    <div class="tag">Étape 1</div>
+    <h2>Flasher les deux moitiés</h2>
+    <ol>
+      <li>Branche la moitié <b>droite</b> en USB en maintenant le bouton BOOT de la carte (ou double appui sur RESET). Un disque <code>RPI-RP2</code> apparaît.</li>
+      <li>Glisse <code>sweeq_hk_right.uf2</code> sur ce disque. La carte redémarre seule.</li>
+      <li>Fais la même chose avec la moitié <b>gauche</b> et <code>sweeq_hk_left.uf2</code>. Les deux fichiers sont à la racine du dépôt <code>qmk_firmware</code>.</li>
+      <li>Efface l'EEPROM : maintiens les deux pouces du milieu ensemble, puis appuie sur la touche <b>Clear EEPROM</b> (schéma « Config » plus bas). Débranche et rebranche le clavier.</li>
+    </ol>
+    <p>Pourquoi effacer : Via garde le clavier dans sa mémoire, et le nombre de couches est passé à 8. Sans effacement, d'anciennes couches peuvent rester.</p>
+    <p>Tu peux aussi compiler et flasher avec tes commandes habituelles <code>make holykeebs/sweeq:hk:flash …</code>. Il faut alors ajouter le compilateur ARM au PATH : <code>export PATH=/Applications/ArmGNUToolchain/15.3.rel2/arm-none-eabi/bin:$PATH</code>.</p>
+  </section>
+
+  <section>
+    <div class="tag">Mode 1 · par défaut</div>
+    <h2>PLAIN_KEYS — tes ordinateurs</h2>
+    <p>Le clavier envoie des touches QWERTY ordinaires. Ton système (Ergo-L) les transforme en lettres Ergo-L. Kanata (Linux) ou Karabiner (Mac) ajoutent les modificateurs sur la rangée centrale et les pouces. Le schéma montre ce qui s'écrit chez toi.</p>
+    <div class="board"><div id="kb-plain" class="kb"></div></div>
+    <div class="how"><strong>Pouces :</strong> Meta · Espace · Espace · Meta. Kanata ou Karabiner les lisent comme Maj/Retour arrière, Nav/Espace, Nav/Espace et AltGr/Entrée.</div>
+  </section>
+
+  <section>
+    <div class="tag">Mode 2 · Windows étranger</div>
+    <h2>ERGOL_ARSENIK — couche de base</h2>
+    <p>Le clavier envoie les codes AZERTY qui impriment des lettres Ergo-L. Les touches colorées de la rangée centrale sont des modificateurs : appui court = la lettre, appui long = le modificateur.</p>
+    <div class="board"><div id="kb-ea" class="kb"></div></div>
+    <div class="how"><strong>Touche ★ :</strong> touche morte. Appuie dessus, puis sur une lettre (couche « touche morte »). Avec Maj, elle écrit <code>!</code>.</div>
+    <div class="how"><strong>Maintenir les deux pouces du milieu</strong> ouvre la couche Config. Un appui court sur l'un des deux écrit une espace.</div>
+  </section>
+
+  <section>
+    <div class="tag">Mode 2 · maintenir un pouce du milieu</div>
+    <h2>Navigation</h2>
+    <p>Maintiens l'un des deux pouces du milieu. Main gauche : flèches et raccourcis. Main droite : pavé numérique.</p>
+    <div class="board"><div id="kb-nav" class="kb"></div></div>
+  </section>
+
+  <section>
+    <div class="tag">Mode 2 · maintenir le pouce extérieur droit</div>
+    <h2>AltGr : symboles</h2>
+    <p>Maintiens le pouce extérieur droit (Entrée en appui court). Avec Maj, certaines touches donnent un second caractère, noté en petit.</p>
+    <div class="board"><div id="kb-ag" class="kb"></div></div>
+    <div class="how"><strong>Depuis cette couche :</strong> maintiens aussi le pouce extérieur gauche pour la couche Chiffres (appui court = Échap).</div>
+  </section>
+
+  <section>
+    <div class="tag">Mode 2 · AltGr puis pouce extérieur gauche</div>
+    <h2>Chiffres et monnaies</h2>
+    <div class="board"><div id="kb-num" class="kb"></div></div>
+    <div class="how"><strong>Pouces du milieu :</strong> espace insécable.</div>
+  </section>
+
+  <section>
+    <div class="tag">Mode 2 · après la touche ★</div>
+    <h2>Touche morte Ergo-L</h2>
+    <p>Appuie sur ★, puis sur une touche de ce schéma. Le caractère sort une fois, puis la couche se referme. Les majuscules (avec Maj) passent par des codes Alt de Windows.</p>
+    <div class="board"><div id="kb-dead" class="kb"></div></div>
+    <div class="how"><strong>Pouces du milieu :</strong> apostrophe typographique ’.</div>
+  </section>
+
+  <section>
+    <div class="tag">Les deux modes · deux pouces du milieu ensemble</div>
+    <h2>Config</h2>
+    <p>Maintiens les deux pouces du milieu en même temps. Cette couche règle le mode, le pavé tactile et le flash.</p>
+    <div class="board"><div id="kb-cfg" class="kb"></div></div>
+    <table>
+      <tr><th>Touche</th><th>Effet</th></tr>
+      <tr><td><b>Mode PLAIN</b> / <b>Mode ERGOL</b></td><td>Choisit le mode. Le clavier s'en souvient après débranchement.</td></tr>
+      <tr><td><b>Boot</b></td><td>Passe la moitié en mode flash.</td></tr>
+      <tr><td><b>Clear EEPROM</b></td><td>Efface la mémoire. Rebranche le clavier ensuite.</td></tr>
+      <tr><td><b>Clic G / M / D</b></td><td>Boutons de souris pour le pavé tactile.</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <div class="tag">À savoir</div>
+    <h2>Limites</h2>
+    <ul>
+      <li>Les codes Alt de Windows ne marchent pas dans toutes les applications. Je ne les ai pas testés sur une vraie machine.</li>
+      <li>Le mode ERGOL_ARSENIK ne sait pas écrire ≤ ≥ ≠, les indices et exposants, ni ẞ. Ils n'existent pas en AZERTY.</li>
+      <li>Les deux pouces du milieu attendent environ 35 ms avant d'écrire une espace, pour distinguer l'appui seul de l'appui double.</li>
+      <li>Le mode ERGOL_ARSENIK suppose un AZERTY de PC. Un AZERTY de Mac donnerait d'autres caractères.</li>
+      <li>Linux : ajoute le nom USB du Sweeq à <code>linux-dev-names-include</code> dans la config Kanata, sinon Kanata ne lit pas les pouces.</li>
+    </ul>
+  </section>
+</main>
+
+<script>
+// Each key: [main, sub, class]. 10 keys per row (5 left, 5 right), then 4 thumbs: outer-left, inner-left, inner-right, outer-right.
+function key(k) {
+  var c = k[2] || '';
+  return '<div class="k ' + c + '"><b>' + (k[0] || '') + '</b>' + (k[1] ? '<small>' + k[1] + '</small>' : '') + '</div>';
+}
+function board(id, rows, thumbs) {
+  var el = document.getElementById(id), html = '';
+  ['left', 'right'].forEach(function (side, s) {
+    html += '<div class="half ' + side + '">';
+    rows.forEach(function (r) { r.slice(s * 5, s * 5 + 5).forEach(function (k) { html += key(k); }); });
+    html += '<div class="thumbs">' + thumbs.slice(s * 2, s * 2 + 2).map(key).join('') + '</div></div>';
+  });
+  el.innerHTML = html;
+}
+function plain(r) { return r.map(function (x) { return Array.isArray(x) ? x : [x]; }); }
+var N = ['', '', 'none'];
+
+board('kb-plain', [
+  plain(['q','c','o','p','w','j','m','d','★','y']),
+  plain(['a','s','e','n','f','l','r','t','i','u']),
+  plain(['z','x','-','v','b','.','h','g',',','k'])
+], [['Meta','Maj / ⌫ chez toi'], ['Esp','Nav chez toi'], ['Esp','Nav chez toi'], ['Meta','AltGr / ↵ chez toi']]);
+
+board('kb-ea', [
+  plain(['q','c','o','p','w','j','m','d','★','y']),
+  [['a','Ctrl','ctrl'],['s','Alt','alt'],['e','Win','gui'],['n','Maj','shift'],['f'],['l'],['r','Maj','shift'],['t','Win','gui'],['i','Alt','alt'],['u','Ctrl','ctrl']],
+  plain(['z','x','-','v','b','.','h','g',',','k'])
+], [['⌫','Maj','shift'],['Esp','Nav','layer'],['Esp','Nav','layer'],['↵','AltGr','layer']]);
+
+board('kb-nav', [
+  plain(['Tab','Début','↑','Fin','Pg↑','⇧Tab','7','8','9','/']),
+  [['Tout','Ctrl+A'],['←'],['↓'],['→'],['Pg↓'],['-'],['4'],['5'],['6'],['0']],
+  [['Annul.','Ctrl+Z'],['Couper','Ctrl+X'],['Copier','Ctrl+C'],['Coller','Ctrl+V'],['Rétab.','Ctrl+Y'],[','],['1'],['2'],['3'],['.']]
+], [['Suppr'], ['', '', 'layer'], ['', '', 'layer'], ['Échap']]);
+
+function ag(rows, th) { board(th.id, rows, th.t); }
+ag([
+  [['^'],['<'],['>'],['$','⇧ ¤'],['%','⇧ ‰'],['@'],['&'],['*','⇧ ×'],["'"],['`']],
+  [['{'],['('],[')'],['}'],['='],['\\'],['+','⇧ ±'],['-'],['/','⇧ ÷'],['"']],
+  [['~'],['['],[']'],['_','⇧ –'],['#'],['|','⇧ ¦'],['!','⇧ ¬'],[';'],[':'],['?']]
+].map(function (r) { return r; }), {id:'kb-ag', t:[['Échap','Chiffres','layer'],['Esp'],['Esp'],['','','layer']]});
+
+board('kb-num', [
+  plain(['€','«','»','$','%','^','&','*','#','@']),
+  plain(['1','2','3','4','5','6','7','8','9','0']),
+  plain(['„','“','”','¢','‰','-',',','.',':','/'])
+], [['','','layer'],['NBSP'],['NBSP'],['','','layer']]);
+
+board('kb-dead', [
+  [['â'],['ç','⇧ Ç'],['œ','⇧ Œ'],['ô'],N,N,['µ'],['_'],N,['û']],
+  [['à','⇧ À'],['é','⇧ É'],['è','⇧ È'],['ê'],['ñ','⇧ Ñ'],['('],[')'],['î'],['ï'],['ù','⇧ Ù']],
+  [['æ','⇧ Æ'],['ß'],['-','⇧ ¿'],['–'],['—'],['…'],N,N,['·','⇧ •'],N]
+], [N, ['’'], ['’'], N]);
+
+board('kb-cfg', [
+  [['Boot','','layer'],['Dump','','none'],['Save','','none'],['Reset','','none'],['Scroll','','none'],['Mode PLAIN','PDF','layer'],['Mode ERGOL','PDF','layer'],N,N,['Boot','','layer']],
+  [['Clear EEPROM','','alt'],['Pav. D','','none'],['Pav. S','','none'],['Pav. buf','','none'],['Scroll','','none'],['Clic G','',''],['Clic M','',''],['Clic D','',''],['Btn 4','',''],['Clear EEPROM','','alt']],
+  [N,N,N,N,['Drag','','none'],['Drag','','none'],['Scroll','','none'],['Btn 5','',''],N,N]
+], [N, N, N, N]);
+</script>
