@@ -306,10 +306,20 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 // ---------------------------------------------------------------------------------------------
 const uint16_t PROGMEM config_plain[]  = {KC_SPC, SPC_R, COMBO_END};
 const uint16_t PROGMEM config_ergol[]  = {TH_NAVL, TH_NAVR, COMBO_END};
+// Each half also opens CONFIG on its own (T1 + T2 on the left, T3 + T4 on the right), so that a single half
+// plugged in alone can reach its Boot key.
+const uint16_t PROGMEM config_plain_l[] = {KC_LGUI, KC_SPC, COMBO_END};
+const uint16_t PROGMEM config_plain_r[] = {SPC_R, KC_RGUI, COMBO_END};
+const uint16_t PROGMEM config_ergol_l[] = {TH_SFT, TH_NAVL, COMBO_END};
+const uint16_t PROGMEM config_ergol_r[] = {TH_NAVR, TH_SYM, COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(config_plain, MO(L_CONFIG)),
     COMBO(config_ergol, MO(L_CONFIG)),
+    COMBO(config_plain_l, MO(L_CONFIG)),
+    COMBO(config_plain_r, MO(L_CONFIG)),
+    COMBO(config_ergol_l, MO(L_CONFIG)),
+    COMBO(config_ergol_r, MO(L_CONFIG)),
 };
 
 // ---------------------------------------------------------------------------------------------

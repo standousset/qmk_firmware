@@ -116,10 +116,10 @@ td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line
     <div class="tag">Étape 1</div>
     <h2>Flasher les deux moitiés</h2>
     <ol>
-      <li>Mets la moitié <b>droite</b> en mode flash, comme avant : maintiens ensemble <b>T2 et T3</b> (les deux touches du milieu en bas), puis appuie sur la touche <b>Boot</b> en haut à gauche ou en haut à droite. Un disque <code>RPI-RP2</code> apparaît. Cela marche avec ton ancien firmware comme avec le nouveau. Secours si le clavier ne répond plus : le petit bouton au <b>dos du circuit</b> (parfois deux pastilles à relier avec une pince à épiler) pendant que tu rebranches l'USB.</li>
+      <li>Mets la moitié <b>droite</b> en mode flash, comme avant : maintiens ensemble <b>T3 et T4</b> (les deux touches du bas sous ta main droite), puis appuie sur <b>Boot</b>, la touche tout en haut à droite. Pour la moitié gauche : <b>T1 et T2</b>, puis Boot tout en haut à gauche. Chaque moitié marche seule, même si l'autre n'est pas branchée. Un disque <code>RPI-RP2</code> apparaît. Cela marche avec ton ancien firmware comme avec le nouveau. Secours si le clavier ne répond plus : le petit bouton au <b>dos du circuit</b> (parfois deux pastilles à relier avec une pince à épiler) pendant que tu rebranches l'USB.</li>
       <li>Glisse <code>sweeq_hk_right.uf2</code> sur ce disque. La carte redémarre seule.</li>
       <li>Fais la même chose avec la moitié <b>gauche</b> et <code>sweeq_hk_left.uf2</code>. Les deux fichiers sont à la racine du dépôt <code>qmk_firmware</code>.</li>
-      <li>Efface l'EEPROM : maintiens ensemble <b>T2 et T3</b> (entourées sur le schéma « Config » plus bas), puis appuie sur la touche <b>Clear EEPROM</b>. Débranche et rebranche le clavier.</li>
+      <li>Efface l'EEPROM : ouvre la couche Config (T2 et T3 ensemble, ou la paire de la moitié branchée), puis appuie sur la touche <b>Clear EEPROM</b>. Débranche et rebranche le clavier.</li>
     </ol>
     <p>Pourquoi effacer : Via garde le clavier dans sa mémoire, et le nombre de couches est passé à 8. Sans effacement, d'anciennes couches peuvent rester.</p>
     <p>Tu peux aussi compiler et flasher avec tes commandes habituelles <code>make holykeebs/sweeq:hk:flash …</code>. Il faut alors ajouter le compilateur ARM au PATH : <code>export PATH=/Applications/ArmGNUToolchain/15.3.rel2/arm-none-eabi/bin:$PATH</code>.</p>
@@ -139,7 +139,7 @@ td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line
     <p>Le clavier envoie les codes AZERTY qui impriment des lettres Ergo-L. Les touches colorées de la rangée centrale sont des modificateurs : appui court = la lettre, appui long = le modificateur.</p>
     <div class="board"><div id="kb-ea" class="kb"></div></div>
     <div class="how"><strong>Touche ★ :</strong> touche morte. Appuie dessus, puis sur une lettre (couche « touche morte »). Avec Maj, elle écrit <code>!</code>.</div>
-    <div class="how"><strong>Maintenir ensemble T2 et T3</strong> (les deux touches entourées) ouvre la couche Config. Un appui court sur T2 ou T3 écrit une espace.</div>
+    <div class="how"><strong>Maintenir ensemble deux touches voisines du bas</strong> (T1+T2, T2+T3 ou T3+T4) ouvre la couche Config.</div>
   </section>
 
   <section>
@@ -175,7 +175,7 @@ td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line
   <section>
     <div class="tag">Les deux modes · T2 + T3 ensemble</div>
     <h2>Config</h2>
-    <p>Les quatre touches du bas sont numérotées T1 T2 T3 T4, de gauche à droite. Ici, T2 et T3 sont les deux touches entourées en vert, les plus proches du centre. Pose le pouce gauche sur T2 et le pouce droit sur T3, appuie en même temps et garde les deux enfoncées. Avec un autre doigt, presse ensuite la touche voulue.</p>
+    <p>Les quatre touches du bas sont numérotées T1 T2 T3 T4, de gauche à droite. Trois paires ouvrent cette couche : <b>T1+T2</b> (pouce gauche seul), <b>T3+T4</b> (pouce droit seul) et <b>T2+T3</b> (un pouce de chaque main). Appuie sur les deux en même temps et garde-les enfoncées. Avec un autre doigt, presse ensuite la touche voulue. Avec une seule moitié branchée, utilise la paire de cette moitié.</p>
     <div class="board"><div id="kb-cfg" class="kb"></div></div>
     <table>
       <tr><th>Touche</th><th>Effet</th></tr>
@@ -192,7 +192,7 @@ td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line
     <ul>
       <li>Les codes Alt de Windows ne marchent pas dans toutes les applications. Je ne les ai pas testés sur une vraie machine.</li>
       <li>Le mode ERGOL_ARSENIK ne sait pas écrire ≤ ≥ ≠, les indices et exposants, ni ẞ. Ils n'existent pas en AZERTY.</li>
-      <li>T2 et T3 attendent environ 35 ms avant d'écrire une espace, pour distinguer l'appui seul de l'appui double.</li>
+      <li>T1 à T4 attendent environ 35 ms avant d'écrire une espace, pour distinguer l'appui seul de l'appui double.</li>
       <li>Le mode ERGOL_ARSENIK suppose un AZERTY de PC. Un AZERTY de Mac donnerait d'autres caractères.</li>
       <li>Linux : ajoute le nom USB du Sweeq à <code>linux-dev-names-include</code> dans la config Kanata, sinon Kanata ne lit pas T1 à T4.</li>
     </ul>
@@ -260,10 +260,10 @@ board('kb-cfg', [
   [N,N,N,N,['Drag','','none'],['Drag','','none'],['Scroll','','none'],['Btn 5','',''],N,N]
 ], [N, N, N, N]);
 
-// Outline the two inner thumb keys (the combo that opens Config) on the boards where it matters.
+// Outline the four thumb keys (the pairs that open Config) on the boards where it matters.
 ['kb-plain', 'kb-ea', 'kb-cfg'].forEach(function (id) {
   var h = document.querySelectorAll('#' + id + ' .half');
-  h[0].querySelectorAll('.thumbs .k')[1].classList.add('hit');
-  h[1].querySelectorAll('.thumbs .k')[0].classList.add('hit');
+  h[0].querySelectorAll('.thumbs .k').forEach(function (k) { k.classList.add('hit'); });
+  h[1].querySelectorAll('.thumbs .k').forEach(function (k) { k.classList.add('hit'); });
 });
 </script>
