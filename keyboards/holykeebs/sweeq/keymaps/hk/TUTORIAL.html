@@ -114,7 +114,7 @@ td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line
       <li>Branche la moitié <b>droite</b> en USB en maintenant le bouton BOOT de la carte (ou double appui sur RESET). Un disque <code>RPI-RP2</code> apparaît.</li>
       <li>Glisse <code>sweeq_hk_right.uf2</code> sur ce disque. La carte redémarre seule.</li>
       <li>Fais la même chose avec la moitié <b>gauche</b> et <code>sweeq_hk_left.uf2</code>. Les deux fichiers sont à la racine du dépôt <code>qmk_firmware</code>.</li>
-      <li>Efface l'EEPROM : maintiens les deux pouces du milieu ensemble, puis appuie sur la touche <b>Clear EEPROM</b> (schéma « Config » plus bas). Débranche et rebranche le clavier.</li>
+      <li>Efface l'EEPROM : maintiens ensemble les deux touches du milieu en bas (entourées sur le schéma « Config » plus bas), puis appuie sur la touche <b>Clear EEPROM</b>. Débranche et rebranche le clavier.</li>
     </ol>
     <p>Pourquoi effacer : Via garde le clavier dans sa mémoire, et le nombre de couches est passé à 8. Sans effacement, d'anciennes couches peuvent rester.</p>
     <p>Tu peux aussi compiler et flasher avec tes commandes habituelles <code>make holykeebs/sweeq:hk:flash …</code>. Il faut alors ajouter le compilateur ARM au PATH : <code>export PATH=/Applications/ArmGNUToolchain/15.3.rel2/arm-none-eabi/bin:$PATH</code>.</p>
@@ -134,7 +134,7 @@ td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line
     <p>Le clavier envoie les codes AZERTY qui impriment des lettres Ergo-L. Les touches colorées de la rangée centrale sont des modificateurs : appui court = la lettre, appui long = le modificateur.</p>
     <div class="board"><div id="kb-ea" class="kb"></div></div>
     <div class="how"><strong>Touche ★ :</strong> touche morte. Appuie dessus, puis sur une lettre (couche « touche morte »). Avec Maj, elle écrit <code>!</code>.</div>
-    <div class="how"><strong>Maintenir les deux pouces du milieu</strong> ouvre la couche Config. Un appui court sur l'un des deux écrit une espace.</div>
+    <div class="how"><strong>Maintenir ensemble les deux touches entourées</strong> (pouces du milieu) ouvre la couche Config. Un appui court sur l'une d'elles écrit une espace.</div>
   </section>
 
   <section>
@@ -170,12 +170,12 @@ td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line
   <section>
     <div class="tag">Les deux modes · deux pouces du milieu ensemble</div>
     <h2>Config</h2>
-    <p>Maintiens les deux pouces du milieu en même temps. Cette couche règle le mode, le pavé tactile et le flash.</p>
+    <p>Les « deux pouces du milieu » sont les deux touches entourées en vert : la touche intérieure de chaque moitié, la plus proche du centre du clavier. Pose le pouce gauche sur celle de gauche et le pouce droit sur celle de droite, appuie en même temps et garde les deux enfoncées. Avec un autre doigt, presse ensuite la touche voulue.</p>
     <div class="board"><div id="kb-cfg" class="kb"></div></div>
     <table>
       <tr><th>Touche</th><th>Effet</th></tr>
       <tr><td><b>Mode PLAIN</b> / <b>Mode ERGOL</b></td><td>Choisit le mode. Le clavier s'en souvient après débranchement.</td></tr>
-      <tr><td><b>Boot</b></td><td>Passe la moitié en mode flash.</td></tr>
+      <tr><td><b>Boot</b></td><td>Passe en mode flash la moitié branchée en USB. Le bouton BOOT de la carte fait la même chose et ne demande pas cette couche.</td></tr>
       <tr><td><b>Clear EEPROM</b></td><td>Efface la mémoire. Rebranche le clavier ensuite.</td></tr>
       <tr><td><b>Clic G / M / D</b></td><td>Boutons de souris pour le pavé tactile.</td></tr>
     </table>
@@ -254,4 +254,11 @@ board('kb-cfg', [
   [['Clear EEPROM','','alt'],['Pav. D','','none'],['Pav. S','','none'],['Pav. buf','','none'],['Scroll','','none'],['Clic G','',''],['Clic M','',''],['Clic D','',''],['Btn 4','',''],['Clear EEPROM','','alt']],
   [N,N,N,N,['Drag','','none'],['Drag','','none'],['Scroll','','none'],['Btn 5','',''],N,N]
 ], [N, N, N, N]);
+
+// Outline the two inner thumb keys (the combo that opens Config) on the boards where it matters.
+['kb-plain', 'kb-ea', 'kb-cfg'].forEach(function (id) {
+  var h = document.querySelectorAll('#' + id + ' .half');
+  h[0].querySelectorAll('.thumbs .k')[1].classList.add('hit');
+  h[1].querySelectorAll('.thumbs .k')[0].classList.add('hit');
+});
 </script>
