@@ -257,7 +257,12 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
                 dead_started = true;
             }
         } else if (dead_started) {
-            clear_oneshot_layer_state(ONESHOT_PRESSED);
+            // QMK clears ONESHOT_OTHER_KEY_PRESSED on this press (we return false below), so the layer
+            // would turn off on release. Re-arm it so that it lasts until the next key or the timeout.
+            // If another key was pressed while the dead key was held, the layer is already off.
+            if (is_oneshot_layer_active()) {
+                set_oneshot_layer(L_EA_DEAD, ONESHOT_OTHER_KEY_PRESSED);
+            }
             dead_started = false;
         }
         return false;
