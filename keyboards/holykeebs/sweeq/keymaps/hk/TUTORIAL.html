@@ -72,6 +72,8 @@ ol, ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; g
 .k.ctrl { background: var(--ctrl); } .k.alt { background: var(--alt); } .k.gui { background: var(--gui); }
 .k.shift { background: var(--shift); } .k.layer { background: var(--layer); } .k.none { background: var(--none); opacity: .7; }
 .k.sys { background: var(--sys); }
+.k { position: relative; }
+.tn { position: absolute; top: 2px; left: 5px; font-family: var(--font-mono); font-size: 10px; font-style: normal; color: var(--accent); }
 .k.hit { outline: 3px solid var(--accent); outline-offset: -1px; }
 .thumbs { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
 .thumbs .k { height: 50px; }
@@ -114,10 +116,10 @@ td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line
     <div class="tag">Étape 1</div>
     <h2>Flasher les deux moitiés</h2>
     <ol>
-      <li>Mets la moitié <b>droite</b> en mode flash, comme avant : maintiens ensemble les deux touches du milieu en bas, puis appuie sur la touche <b>Boot</b> en haut à gauche ou en haut à droite. Un disque <code>RPI-RP2</code> apparaît. Cela marche avec ton ancien firmware comme avec le nouveau. Secours si le clavier ne répond plus : le petit bouton au <b>dos du circuit</b> (parfois deux pastilles à relier avec une pince à épiler) pendant que tu rebranches l'USB.</li>
+      <li>Mets la moitié <b>droite</b> en mode flash, comme avant : maintiens ensemble <b>T2 et T3</b> (les deux touches du milieu en bas), puis appuie sur la touche <b>Boot</b> en haut à gauche ou en haut à droite. Un disque <code>RPI-RP2</code> apparaît. Cela marche avec ton ancien firmware comme avec le nouveau. Secours si le clavier ne répond plus : le petit bouton au <b>dos du circuit</b> (parfois deux pastilles à relier avec une pince à épiler) pendant que tu rebranches l'USB.</li>
       <li>Glisse <code>sweeq_hk_right.uf2</code> sur ce disque. La carte redémarre seule.</li>
       <li>Fais la même chose avec la moitié <b>gauche</b> et <code>sweeq_hk_left.uf2</code>. Les deux fichiers sont à la racine du dépôt <code>qmk_firmware</code>.</li>
-      <li>Efface l'EEPROM : maintiens ensemble les deux touches du milieu en bas (entourées sur le schéma « Config » plus bas), puis appuie sur la touche <b>Clear EEPROM</b>. Débranche et rebranche le clavier.</li>
+      <li>Efface l'EEPROM : maintiens ensemble <b>T2 et T3</b> (entourées sur le schéma « Config » plus bas), puis appuie sur la touche <b>Clear EEPROM</b>. Débranche et rebranche le clavier.</li>
     </ol>
     <p>Pourquoi effacer : Via garde le clavier dans sa mémoire, et le nombre de couches est passé à 8. Sans effacement, d'anciennes couches peuvent rester.</p>
     <p>Tu peux aussi compiler et flasher avec tes commandes habituelles <code>make holykeebs/sweeq:hk:flash …</code>. Il faut alors ajouter le compilateur ARM au PATH : <code>export PATH=/Applications/ArmGNUToolchain/15.3.rel2/arm-none-eabi/bin:$PATH</code>.</p>
@@ -128,7 +130,7 @@ td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line
     <h2>PLAIN_KEYS — tes ordinateurs</h2>
     <p>Le clavier envoie des touches QWERTY ordinaires. Ton système (Ergo-L) les transforme en lettres Ergo-L. Kanata (Linux) ou Karabiner (Mac) ajoutent les modificateurs sur la rangée centrale et les pouces. Le schéma montre ce qui s'écrit chez toi.</p>
     <div class="board"><div id="kb-plain" class="kb"></div></div>
-    <div class="how"><strong>Pouces :</strong> Meta · Espace · Espace · Meta. Kanata ou Karabiner les lisent comme Maj/Retour arrière, Nav/Espace, Nav/Espace et AltGr/Entrée.</div>
+    <div class="how"><strong>T1 à T4 :</strong> Meta · Espace · Espace · Meta. Kanata ou Karabiner les lisent comme Maj/Retour arrière, Nav/Espace, Nav/Espace et AltGr/Entrée.</div>
   </section>
 
   <section>
@@ -137,29 +139,29 @@ td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line
     <p>Le clavier envoie les codes AZERTY qui impriment des lettres Ergo-L. Les touches colorées de la rangée centrale sont des modificateurs : appui court = la lettre, appui long = le modificateur.</p>
     <div class="board"><div id="kb-ea" class="kb"></div></div>
     <div class="how"><strong>Touche ★ :</strong> touche morte. Appuie dessus, puis sur une lettre (couche « touche morte »). Avec Maj, elle écrit <code>!</code>.</div>
-    <div class="how"><strong>Maintenir ensemble les deux touches entourées</strong> (pouces du milieu) ouvre la couche Config. Un appui court sur l'une d'elles écrit une espace.</div>
+    <div class="how"><strong>Maintenir ensemble T2 et T3</strong> (les deux touches entourées) ouvre la couche Config. Un appui court sur T2 ou T3 écrit une espace.</div>
   </section>
 
   <section>
-    <div class="tag">Mode 2 · maintenir un pouce du milieu</div>
+    <div class="tag">Mode 2 · maintenir T2 ou T3</div>
     <h2>Navigation</h2>
-    <p>Maintiens l'un des deux pouces du milieu. Main gauche : flèches et raccourcis. Main droite : pavé numérique.</p>
+    <p>Maintiens T2 ou T3. Main gauche : flèches et raccourcis. Main droite : pavé numérique.</p>
     <div class="board"><div id="kb-nav" class="kb"></div></div>
   </section>
 
   <section>
-    <div class="tag">Mode 2 · maintenir le pouce extérieur droit</div>
+    <div class="tag">Mode 2 · maintenir T4</div>
     <h2>AltGr : symboles</h2>
-    <p>Maintiens le pouce extérieur droit (Entrée en appui court). Avec Maj, certaines touches donnent un second caractère, noté en petit.</p>
+    <p>Maintiens T4 (Entrée en appui court). Avec Maj, certaines touches donnent un second caractère, noté en petit.</p>
     <div class="board"><div id="kb-ag" class="kb"></div></div>
-    <div class="how"><strong>Depuis cette couche :</strong> maintiens aussi le pouce extérieur gauche pour la couche Chiffres (appui court = Échap).</div>
+    <div class="how"><strong>Depuis cette couche :</strong> maintiens aussi T1 pour la couche Chiffres (appui court = Échap).</div>
   </section>
 
   <section>
-    <div class="tag">Mode 2 · AltGr puis pouce extérieur gauche</div>
+    <div class="tag">Mode 2 · T4 puis T1</div>
     <h2>Chiffres et monnaies</h2>
     <div class="board"><div id="kb-num" class="kb"></div></div>
-    <div class="how"><strong>Pouces du milieu :</strong> espace insécable.</div>
+    <div class="how"><strong>T2 et T3 :</strong> espace insécable.</div>
   </section>
 
   <section>
@@ -167,13 +169,13 @@ td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line
     <h2>Touche morte Ergo-L</h2>
     <p>Appuie sur ★, puis sur une touche de ce schéma. Le caractère sort une fois, puis la couche se referme. Les majuscules (avec Maj) passent par des codes Alt de Windows.</p>
     <div class="board"><div id="kb-dead" class="kb"></div></div>
-    <div class="how"><strong>Pouces du milieu :</strong> apostrophe typographique ’.</div>
+    <div class="how"><strong>T2 et T3 :</strong> apostrophe typographique ’.</div>
   </section>
 
   <section>
-    <div class="tag">Les deux modes · deux pouces du milieu ensemble</div>
+    <div class="tag">Les deux modes · T2 + T3 ensemble</div>
     <h2>Config</h2>
-    <p>Les « deux pouces du milieu » sont les deux touches entourées en vert : la touche intérieure de chaque moitié, la plus proche du centre du clavier. Pose le pouce gauche sur celle de gauche et le pouce droit sur celle de droite, appuie en même temps et garde les deux enfoncées. Avec un autre doigt, presse ensuite la touche voulue.</p>
+    <p>Les quatre touches du bas sont numérotées T1 T2 T3 T4, de gauche à droite. Ici, T2 et T3 sont les deux touches entourées en vert, les plus proches du centre. Pose le pouce gauche sur T2 et le pouce droit sur T3, appuie en même temps et garde les deux enfoncées. Avec un autre doigt, presse ensuite la touche voulue.</p>
     <div class="board"><div id="kb-cfg" class="kb"></div></div>
     <table>
       <tr><th>Touche</th><th>Effet</th></tr>
@@ -190,9 +192,9 @@ td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line
     <ul>
       <li>Les codes Alt de Windows ne marchent pas dans toutes les applications. Je ne les ai pas testés sur une vraie machine.</li>
       <li>Le mode ERGOL_ARSENIK ne sait pas écrire ≤ ≥ ≠, les indices et exposants, ni ẞ. Ils n'existent pas en AZERTY.</li>
-      <li>Les deux pouces du milieu attendent environ 35 ms avant d'écrire une espace, pour distinguer l'appui seul de l'appui double.</li>
+      <li>T2 et T3 attendent environ 35 ms avant d'écrire une espace, pour distinguer l'appui seul de l'appui double.</li>
       <li>Le mode ERGOL_ARSENIK suppose un AZERTY de PC. Un AZERTY de Mac donnerait d'autres caractères.</li>
-      <li>Linux : ajoute le nom USB du Sweeq à <code>linux-dev-names-include</code> dans la config Kanata, sinon Kanata ne lit pas les pouces.</li>
+      <li>Linux : ajoute le nom USB du Sweeq à <code>linux-dev-names-include</code> dans la config Kanata, sinon Kanata ne lit pas T1 à T4.</li>
     </ul>
   </section>
 </main>
@@ -208,7 +210,7 @@ function board(id, rows, thumbs) {
   ['left', 'right'].forEach(function (side, s) {
     html += '<div class="half ' + side + '">';
     rows.forEach(function (r) { r.slice(s * 5, s * 5 + 5).forEach(function (k) { html += key(k); }); });
-    html += '<div class="thumbs">' + thumbs.slice(s * 2, s * 2 + 2).map(key).join('') + '</div></div>';
+    html += '<div class="thumbs">' + thumbs.slice(s * 2, s * 2 + 2).map(function (k, i) { return key(k).replace('<b>', '<i class="tn">T' + (s * 2 + i + 1) + '</i><b>'); }).join('') + '</div></div>';
   });
   el.innerHTML = html;
 }
