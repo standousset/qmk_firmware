@@ -114,7 +114,7 @@ td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line
     <div class="tag">Étape 1</div>
     <h2>Flasher les deux moitiés</h2>
     <ol>
-      <li>Mets la moitié <b>droite</b> en mode flash : débranche, puis appuie sur le petit bouton au <b>dos du circuit</b> (sur certaines cartes, ce sont deux pastilles à relier un instant avec une pince à épiler) pendant que tu rebranches l'USB. Un disque <code>RPI-RP2</code> apparaît. Si tu ne trouves pas ce bouton, une photo du dos suffit pour que je te l'indique.</li>
+      <li>Mets la moitié <b>droite</b> en mode flash, comme avant : maintiens ensemble les deux touches du milieu en bas, puis appuie sur la touche <b>Boot</b> en haut à gauche ou en haut à droite. Un disque <code>RPI-RP2</code> apparaît. Cela marche avec ton ancien firmware comme avec le nouveau. Secours si le clavier ne répond plus : le petit bouton au <b>dos du circuit</b> (parfois deux pastilles à relier avec une pince à épiler) pendant que tu rebranches l'USB.</li>
       <li>Glisse <code>sweeq_hk_right.uf2</code> sur ce disque. La carte redémarre seule.</li>
       <li>Fais la même chose avec la moitié <b>gauche</b> et <code>sweeq_hk_left.uf2</code>. Les deux fichiers sont à la racine du dépôt <code>qmk_firmware</code>.</li>
       <li>Efface l'EEPROM : maintiens ensemble les deux touches du milieu en bas (entourées sur le schéma « Config » plus bas), puis appuie sur la touche <b>Clear EEPROM</b>. Débranche et rebranche le clavier.</li>
@@ -178,7 +178,7 @@ td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line
     <table>
       <tr><th>Touche</th><th>Effet</th></tr>
       <tr><td><b>Mode PLAIN</b> / <b>Mode ERGOL</b></td><td>Choisit le mode. Le clavier s'en souvient après débranchement.</td></tr>
-      <tr><td><b>Boot</b></td><td>Passe en mode flash la moitié branchée en USB. Pour un premier flash, utilise plutôt le bouton au dos du circuit.</td></tr>
+      <tr><td><b>Boot</b></td><td>Passe en mode flash la moitié branchée en USB. C'est la méthode normale. Le bouton au dos du circuit sert de secours.</td></tr>
       <tr><td><b>Clear EEPROM</b></td><td>Efface la mémoire. Rebranche le clavier ensuite.</td></tr>
       <tr><td><b>Clic G / M / D</b></td><td>Boutons de souris pour le pavé tactile.</td></tr>
     </table>
